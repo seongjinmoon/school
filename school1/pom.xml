@@ -137,13 +137,12 @@
 		</dependency>
 
 		<!-- mysql driver -->
-		<!-- 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.31</version>
         </dependency>
-        -->
+       
 
 		<!-- oracle 10g driver -->
 		<!--
@@ -181,7 +180,6 @@
 		-->
 
 		<!-- log4jdbc driver -->
-        <!--  
         <dependency>
             <groupId>com.googlecode.log4jdbc</groupId>
             <artifactId>log4jdbc</artifactId>
@@ -193,7 +191,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        -->
+       
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -213,6 +211,19 @@
 			<artifactId>icu4j</artifactId>
 			<version>53.1</version>
 		</dependency>
+		
+		<!-- Validator -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
+        </dependency>
 	</dependencies>
 
     <build>
