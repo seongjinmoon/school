@@ -8,5 +8,8 @@ public interface TempMapper {
 	
 	//임시데이터 가져오기
 	TempVO selectTemp(TempVO vo) throws Exception;
+	
+	//임시데이터 등록
+	void insertTemp(TempVO vo) throws Exception;
 
 }

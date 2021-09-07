@@ -11,8 +11,17 @@
 		SELECT
 		  TEMP_ID
 		  , TEMP_VAL
-		FROM lettemp
+		FROM lettemp2
 		WHERE TEMP_ID = #{tempId}
 	</select>
-
+	
+	<insert id="insertTemp" parameterType="egovframework.let.temp.service.TempVO">
+		INSERT INTO lettemp2 (
+			TEMP_ID
+			,TEMP_VAL
+		) VALUES (
+			#{tempId}
+			,#{tempVal}
+		)
+	</insert>
 </mapper>
