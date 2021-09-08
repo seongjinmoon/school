@@ -10,13 +10,24 @@
 <title>데이터 가져오기~</title>
 </head>
 <body>
-* 등록폼
-<form action="/temp/insert.do" method="post" name="frm">
-	<label for="tempVal">값 정보 : </label> 
-	<input type="text" id="tempVal" name="tempVal"/>
-	<br/>
-	<button type="submit">등록</button>
-</form>
+<table>
+	<thead>
+		<tr>
+			<th>TEMP_ID</th>
+			<th>TEMP_VAL</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach var="result" items="${resultList }">
+			<tr>
+				<td><c:out value="${result.tempId}"/></td>
+				<td><c:out value="${result.tempVal}"/></td>
+			</tr>
+		</c:forEach>
+		
+	</tbody>
+</table>
+
 </body>
 </html>
 

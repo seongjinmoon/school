@@ -24,4 +24,18 @@
 			,#{tempVal}
 		)
 	</insert>
+	
+	<select id="selectTempList" resultType="egovMap">
+		SELECT
+		  TEMP_ID
+		  , TEMP_VAL
+		FROM lettemp2
+	</select>
+	
+	<update id="updateTemp" parameterType="egovframework.let.temp.service.TempVO">
+		UPDATE lettemp2 SET
+			TEMP_VAL = #{tempVal}
+		WHERE TEMP_ID = #{tempId}
+	</update>
+	
 </mapper>
