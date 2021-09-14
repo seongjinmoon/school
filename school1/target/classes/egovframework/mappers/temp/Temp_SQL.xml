@@ -7,15 +7,15 @@
 		<result property="tempVal" column="TEMP_VAL"/>
 	</resultMap>
 
-	<select id="selectTemp" resultMap="temp">
+	<select id="selectTemp" resultType="tempVO">
 		SELECT
-		  TEMP_ID
-		  , TEMP_VAL
+		  TEMP_ID AS TempId
+		  , TEMP_VAL AS TempVal
 		FROM lettemp2
 		WHERE TEMP_ID = #{tempId}
 	</select>
 	
-	<insert id="insertTemp" parameterType="egovframework.let.temp.service.TempVO">
+	<insert id="insertTemp" parameterType="tempVO">
 		INSERT INTO lettemp2 (
 			TEMP_ID
 			,TEMP_VAL
@@ -30,6 +30,13 @@
 		  TEMP_ID
 		  , TEMP_VAL
 		FROM lettemp2
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+	
+	<select id="selectTempListCnt" resultType="java.lang.Integer">
+		SELECT
+		  COUNT(*) CNT
+		FROM lettemp2
 	</select>
 	
 	<update id="updateTemp" parameterType="egovframework.let.temp.service.TempVO">
@@ -37,5 +44,10 @@
 			TEMP_VAL = #{tempVal}
 		WHERE TEMP_ID = #{tempId}
 	</update>
+	
+	<delete id="deleteTemp" parameterType="egovframework.let.temp.service.TempVO">
+		DELETE FROM lettemp2
+		WHERE TEMP_ID = #{tempId}
+	</delete>
 	
 </mapper>
