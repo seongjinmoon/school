@@ -48,9 +48,9 @@ a{text-decoration:underline;}
 </table>
 <div id="paging_div">
 	<ul class="paging_align">
-		<c:url var="pageUrl" value="/temp/selectList.do"/>
+		<c:url var="pageUrl" value="/temp/selectList.do?"/>
 		<c:set var="pagingParam"><c:out value="${pageUrl}"/></c:set>
-	   <ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="fn_egov_select_brdMstr"  />
+	   <ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}" />
 	</ul>
 </div>
 
