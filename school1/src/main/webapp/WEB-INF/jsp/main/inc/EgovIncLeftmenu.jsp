@@ -71,6 +71,16 @@ String menuNo = ((String)session.getAttribute("menuNo")!=null)?(String)session.g
 				<li class="dept02"><a href="javascript:fn_main_headPageAction('54','cop/com/selectBBSUseInfs.do')">게시판사용관리</a></li> 
 				<li class="dept02"><a href="javascript:fn_main_headPageAction('55','cop/bbs/selectBoardList.do?bbsId=BBSMSTR_AAAAAAAAAAAA')">공지사항관리</a></li>
                 <li class="dept02"><a href="javascript:fn_main_headPageAction('56','cop/bbs/selectBoardList.do?bbsId=BBSMSTR_BBBBBBBBBBBB')">사이트갤러리관리</a></li>
+                
+                <li class="dept02"><a href="/admin/rsv/rsvSelectList.do">기본예약관리</a></li>
+			</ul> 
+		</li>
+		<% } %>
+		<% if (menuNo.indexOf("7")== 0) {%>
+		<li class="leftmenu_dept01">
+			<a href="/rsv/selectList.do?menuNo=7">예약</a>
+			<ul>	
+				<li class="dept02"><a href="/rsv/selectList.do?menuNo=7">예약</a></li>
 			</ul> 
 		</li>
 		<% } %>
