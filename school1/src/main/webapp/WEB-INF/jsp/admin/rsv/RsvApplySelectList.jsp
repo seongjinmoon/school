@@ -49,10 +49,8 @@
 				    <%-- 목록영역 --%>
 					<div id="bbs_wrap">
 						<div class="total">
-							총 게시물 
-							<strong><c:out value="${paginationInfo.totalRecordCount}"/></strong>건 ㅣ 
-							현재페이지 <strong><c:out value="${paginationInfo.currentPageNo}"/></strong>/
-							<c:out value="${paginationInfo.totalPageCount}"/>
+							총 예약 수 
+							<strong><c:out value="${fn:length(resultList)}"/></strong>건
 						</div>	
 				        <div class="bss_list">
 				            <table class="list_table">
@@ -67,7 +65,7 @@
 				              <tbody>
 				                  <c:forEach var="result" items="${resultList}" varStatus="status">
 										<tr>
-											<td class="num"><c:out value="${paginationInfo.totalRecordCount - ((searchVO.pageIndex-1) * searchVO.pageUnit) - (status.count - 1)}" /></td>
+											<td class="num"><c:out value="${fn:length(resultList) - (status.index)}" /></td>
 						                    <td><c:out value="${result.chargerNm}"/>(<c:out value="${result.frstRegisterId}"/>)</td>
 						                    <td><fmt:formatDate value="${result.frstRegistPnttm}"  pattern="yyyy-MM-dd"/></td>
 						                    <td>
@@ -88,11 +86,6 @@
 				                </tbody>
 				            </table>
 				        </div>
-					    <div id="paging">
-					    	<c:url var="pageUrl" value="/admin/rsv/selectApplyList.do${_BASE_PARAM}"/>
-							<c:set var="pagingParam"><c:out value="${pageUrl}"/></c:set>
-						    <ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}"/>
-					    </div>
 					    <div class="btn-cont ar">
 							<c:url var="listUrl" value="/admin/rsv/rsvSelectList.do${_BASE_PARAM}"/>
 						    <a href="${listUrl}" class="btn">목록</a>

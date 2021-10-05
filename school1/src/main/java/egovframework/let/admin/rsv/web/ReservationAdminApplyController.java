@@ -35,27 +35,11 @@ public class ReservationAdminApplyController {
 	//예약자정보 목록 가져오기
 	@RequestMapping(value = "/admin/rsv/selectApplyList.do")
 	public String selectApplyList(@ModelAttribute("searchVO") ReservationApplyVO searchVO,  HttpServletRequest request, ModelMap model) throws Exception{
-		
-		PaginationInfo paginationInfo = new PaginationInfo();
-
-		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
-		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
-		paginationInfo.setPageSize(searchVO.getPageSize());
-
-		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+		//관리자
+		searchVO.setMngAt("Y");
 		
 		List<EgovMap> resultList = reservationServiceApply.selectReservationApplyList(searchVO);
 		model.addAttribute("resultList", resultList);
-		
-		int totCnt = reservationServiceApply.selectReservationApplyListCnt(searchVO);
-		
-		paginationInfo.setTotalRecordCount(totCnt);
-		model.addAttribute("paginationInfo", paginationInfo);
-		
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		model.addAttribute("USER_INFO", user);
 		
 		return "admin/rsv/RsvApplySelectList";
 	}
