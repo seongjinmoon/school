@@ -65,7 +65,6 @@
 				<div id="contents">
 					<form action="${actionUrl}" method="post" id="frm" name="frm" onsubmit="return regist()">
 						<input type="hidden" name="resveId" value="${result.resveId}"/>
-						<input type="hidden" name="resveSeCode" value="TYPE01"/>
 						
 						<table class="chart2">
 					        <caption>예약정보 작성</caption>
@@ -78,6 +77,15 @@
 					                <th scope="row">프로그램명</th>
 					                <td>
 					                    <input type="text" id="resveSj" name="resveSj" title="제목입력" class="q3" value="<c:out value="${result.resveSj}"/>"/>
+					                </td>
+					            </tr>
+					            <tr>
+					                <th scope="row">프로그램 종류</th>
+					                <td>
+					                    <select id="resveSeCode" name="resveSeCode">
+					                		<option value="TYPE01">선착순</option>
+					                		<option value="TYPE02" <c:if test="${result.resveSeCode eq 'TYPE02'}">selected="selected"</c:if>>승인관리</option>
+					                	</select>
 					                </td>
 					            </tr>
 					            <tr>

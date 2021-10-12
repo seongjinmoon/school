@@ -54,6 +54,15 @@
 								<dd><c:out value="${result.resveSj}"/></dd>
 							</dl>
 							<dl class="tit_view">
+								<dt>신청유형</dt>
+								<dd>
+									<c:choose>
+										<c:when test="${result.resveSeCode eq 'TYPE01'}">선착순</c:when>
+										<c:when test="${result.resveSeCode eq 'TYPE02'}">승인관리</c:when>
+									</c:choose>
+								</dd>
+							</dl>
+							<dl class="tit_view">
 								<dt>강사명</dt>
 								<dd><c:out value="${result.recNm}"/></dd>
 							</dl>
@@ -81,7 +90,7 @@
 						<div class="btn-cont ar">
 							 <c:choose>
 	                    		<c:when test="${result.applyStatus eq '1'}"><a href="#" class="btn btn-status" data-status="${result.applyStatus}">접수 대기중</a></c:when>
-	                    		<c:when test="${result.applyStatus eq '2'}"><a href="/rsv/rsvApplyInsert.do${_BASE_PARAM}" id="btn-reg" class="btn spot">신청</a></c:when>
+	                    		<c:when test="${result.applyStatus eq '2'}"><a href="/rsv/rsvApplyRegist.do${_BASE_PARAM}" id="btn-apply" class="btn spot">신청</a></c:when>
 	                    		<c:when test="${result.applyStatus eq '3'}"><a href="#" class="btn btn-status" data-status="${result.applyStatus}">접수마감</a></c:when>
 	                    		<c:when test="${result.applyStatus eq '4'}"><a href="#" class="btn btn-status" data-status="${result.applyStatus}">운영중</a></c:when>
 	                    		<c:otherwise><a href="#" class="btn btn-status" data-status="${result.applyStatus}">종료</a></c:otherwise>
@@ -123,6 +132,28 @@ $(document).ready(function(){
 		if(!confirm("신청 하시겠습니까?")){
 			return false;
 		}
+	});
+	
+	$("#btn-apply").click(function(){
+		var href = $(this).attr("href");
+		
+		$.ajax({
+			type : "POST",
+			url : "/rsv/rsvCheck.json",
+			data : {"resveId" : "${searchVO.resveId}"},
+			dataType : "json",
+			success : function(result) {
+				if(result.successYn == "Y"){
+					location.href = href;
+				}else{
+					alert(result.message);
+				}
+			},error : function(result) {
+				alert("error");
+			}
+		});
+		
+		return false;
 	});
 });
 </script>                        

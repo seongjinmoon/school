@@ -30,7 +30,9 @@ public interface ReservationApplyMapper {
 	//예약자 삭제하기
 	void deleteReservationApply(ReservationApplyVO vo) throws Exception;
 	
+	//예약자 승인처리
+	void updateReservationConfirm(ReservationApplyVO vo) throws Exception;
 	
-	
-	
+	//예약가능여부 확인
+	void rsvCheck(ReservationApplyVO vo) throws Exception;
 }

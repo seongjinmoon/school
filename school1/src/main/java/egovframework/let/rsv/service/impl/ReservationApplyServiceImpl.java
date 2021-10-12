@@ -89,5 +89,27 @@ public class ReservationApplyServiceImpl extends EgovAbstractServiceImpl impleme
 		reservationApplyMapper.deleteReservationApply(vo);
 	}
 	
-		
+	//예약자 승인처리
+	@Override
+	public void updateReservationConfirm(ReservationApplyVO vo) throws Exception {
+		reservationApplyMapper.updateReservationConfirm(vo);
+	}
+	
+	//예약가능여부 확인
+	@Override
+	public ReservationApplyVO rsvCheck(ReservationApplyVO vo) throws Exception{
+		//신청 인원 체크
+  		ReservationVO reservationVO = new ReservationVO();
+  		reservationVO.setResveId(vo.getResveId());
+  		ReservationVO result = reservationService.selectReservation(reservationVO);
+  		if(result.getMaxAplyCnt() <= result.getApplyFCnt()) {
+  			vo.setErrorCode("ERROR-R1");
+  			vo.setMessage("마감 되었습니다.");
+  		}else if(reservationApplyMapper.duplicateApplyCheck(vo) > 0){
+  			vo.setErrorCode("ERROR-R2");
+			vo.setMessage("이미 해당 프로그램 예약이 되어져 있습니다.");
+  		}
+  		
+  		return vo;
+	}
 }

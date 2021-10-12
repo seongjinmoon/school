@@ -5,7 +5,7 @@ import java.io.Serializable;
 import egovframework.com.cmm.ComDefaultVO;
 
 
-public class ReservationApplyVO extends ComDefaultVO implements Serializable {
+public class ReservationApplyVO extends ReservationVO implements Serializable {
 
 	//예약ID
 	private String resveId;

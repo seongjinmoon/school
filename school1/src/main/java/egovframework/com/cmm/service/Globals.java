@@ -17,6 +17,7 @@ package egovframework.com.cmm.service;
  */
 
 public class Globals {
+	
     //파일 업로드 원 파일명
 	public static final String ORIGIN_FILE_NM = "originalFileName";
 	//파일 확장자
@@ -27,4 +28,8 @@ public class Globals {
 	public static final String UPLOAD_FILE_NM = "uploadFileName";
 	//파일경로
 	public static final String FILE_PATH = "filePath";
+	
+	public static final String MAIN_PAGE = EgovProperties.getProperty("Globals.MainPage");
+	
+	
 }

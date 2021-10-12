@@ -1,5 +1,6 @@
 package egovframework.let.rsv.web;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import egovframework.com.cmm.LoginVO;
@@ -11,9 +12,11 @@ import egovframework.let.rsv.service.ReservationVO;
 import egovframework.let.utl.fcc.service.EgovStringUtil;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import net.sf.json.JSONObject;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -83,11 +86,17 @@ public class ReservationApplyController {
 			model.addAttribute("USER_INFO", user);
 		}
 	    
+	    //프로그램 정보
+	    ReservationVO reservation = new ReservationVO();
+		if(!EgovStringUtil.isEmpty(ReservationVO.getResveId())) {
+			reservation = reservationService.selectReservation(ReservationVO);
+		}
+		model.addAttribute("reservation", reservation);
+		
+		//예약정보
 	    ReservationApplyVO result = new ReservationApplyVO();
 		if(!EgovStringUtil.isEmpty(ReservationVO.getReqstId())) {
 			result = reservationServiceApply.selectReservationApply(ReservationVO);
-		}else{
-			
 		}
 		
 		model.addAttribute("result", result);
@@ -164,4 +173,36 @@ public class ReservationApplyController {
 		
 	    return "forward:/rsv/selectList.do";
 	}
+	
+	//예약여부 체크
+	@RequestMapping(value = "/rsv/rsvCheck.json")
+	public void rsvCheck(@ModelAttribute("searchVO") ReservationApplyVO searchVO, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception{
+		String succcessYn = "Y";
+		String message = "성공";
+		
+		JSONObject jo = new JSONObject();
+    	response.setContentType("text/javascript; charset=utf-8");
+    	
+    	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+    	if(user == null){
+    		succcessYn = "N";
+    		message = "로그인 후 사용가능합니다.";
+		}
+    	searchVO.setUserId(user.getId());
+    	
+    	ReservationApplyVO result = reservationServiceApply.rsvCheck(searchVO);
+    	if(!EgovStringUtil.isEmpty(result.getErrorCode())){
+    		succcessYn = "N";
+    		message = result.getMessage();
+    	}
+    	
+    	jo.put("successYn", succcessYn);
+		jo.put("message", message);
+		
+		PrintWriter printwriter = response.getWriter();
+    	printwriter.println(jo.toString());
+		printwriter.flush();
+		printwriter.close();
+	}
+	
 }

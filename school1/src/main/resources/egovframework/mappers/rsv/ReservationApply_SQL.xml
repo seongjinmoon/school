@@ -105,7 +105,10 @@
 			, #{chargerNm}
 			, #{telno}
 			, #{email}
-			, 'R'
+			, <choose>
+				<when test='resveSeCode == "TYPE01"'>'O'</when>
+				<otherwise>'R'</otherwise>
+			</choose>
 			, #{creatIp}
 			, 'Y'
 			, NOW()
@@ -144,4 +147,14 @@
 			AND USE_AT = 'Y'
 	</select>
 	
+	<update id="updateReservationConfirm" parameterType="egovframework.let.rsv.service.ReservationApplyVO">
+		UPDATE RESVEREQSTINFO SET
+			CONFM_SE_CODE = #{confmSeCode}
+			, RETURN_RESN = #{returnResn}
+			, CONFMER_ID = #{userId}
+			, CONFM_PNTTM = NOW()
+			, LAST_UPDT_PNTTM = NOW()
+			, LAST_UPDUSR_ID = #{userId}
+		WHERE REQST_ID = #{reqstId}
+	</update>
 </mapper>

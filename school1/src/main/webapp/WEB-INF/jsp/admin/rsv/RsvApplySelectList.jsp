@@ -59,6 +59,7 @@
 				                      <th class="num" scope="col">번호</th>
 				                      <th scope="col">신청자명</th>
 				                      <th scope="col">신청일</th>
+				                      <th scope="col">신청상태</th>
 				                      <th scope="col">관리</th>
 				                  </tr>
 				              </thead>
@@ -66,22 +67,38 @@
 				                  <c:forEach var="result" items="${resultList}" varStatus="status">
 										<tr>
 											<td class="num"><c:out value="${fn:length(resultList) - (status.index)}" /></td>
-						                    <td><c:out value="${result.chargerNm}"/>(<c:out value="${result.frstRegisterId}"/>)</td>
-						                    <td><fmt:formatDate value="${result.frstRegistPnttm}"  pattern="yyyy-MM-dd"/></td>
 						                    <td>
-												<c:url var="deleteeUrl" value="/admin/rsv/rsvApplyDelete.do${_BASE_PARAM}">
+						                    	<c:url var="viewUrl" value="/admin/rsv/rsvApplySelect.do${_BASE_PARAM}">
 													<c:param name="resveId" value="${result.resveId}"/>
 													<c:param name="reqstId" value="${result.reqstId}"/>
 													<c:param name="pageIndex" value="${searchVO.pageIndex}" />
 												</c:url>
-												<a href="${deleteeUrl}" class="btn spot btn-del">삭제</a>
+						                    	<a href="${viewUrl}">
+						                    		<c:out value="${result.chargerNm}"/>(<c:out value="${result.frstRegisterId}"/>)
+						                    	</a>
+						                    </td>
+						                    <td><fmt:formatDate value="${result.frstRegistPnttm}"  pattern="yyyy-MM-dd"/></td>
+						                    <td>
+						                    	<c:choose>
+						                    		<c:when test="${result.confmSeCode eq 'R'}">신청 접수 중</c:when>
+						                    		<c:when test="${result.confmSeCode eq 'O'}">신청 승인</c:when>
+						                    		<c:when test="${result.confmSeCode eq 'X'}">신청 반려</c:when>
+						                    	</c:choose>
+						                    </td>
+						                    <td>
+												<c:url var="deleteUrl" value="/admin/rsv/rsvApplyDelete.do${_BASE_PARAM}">
+													<c:param name="resveId" value="${result.resveId}"/>
+													<c:param name="reqstId" value="${result.reqstId}"/>
+													<c:param name="pageIndex" value="${searchVO.pageIndex}" />
+												</c:url>
+												<a href="${deleteUrl}" class="btn spot btn-del">삭제</a>
 						                    </td>
 										</tr>
 								  </c:forEach>
 								  
 								  <%-- 글이 없을 경우 --%>
 								  <c:if test="${fn:length(resultList) == 0}">
-							    	<tr class="empty"><td colspan="4">신청자가 없습니다.</td></tr>
+							    	<tr class="empty"><td colspan="5">신청자가 없습니다.</td></tr>
 							    </c:if>
 				                </tbody>
 				            </table>
