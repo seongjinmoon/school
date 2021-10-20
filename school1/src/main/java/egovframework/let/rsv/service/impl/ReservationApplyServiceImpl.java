@@ -173,7 +173,7 @@ public class ReservationApplyServiceImpl extends EgovAbstractServiceImpl impleme
 	            	Row row = sheet.getRow(r); //row 가져오기
 	                if(row != null) {
 	                	int cells = row.getPhysicalNumberOfCells();
-		                for(int c = 0; c < 2; c++) {	//cell 가져오기
+		                for(int c = 0; c < 4; c++) {	//cell 가져오기
 		                	Cell cell = row.getCell(c);
 		                	result = true;
 		                	if(cell != null) {
@@ -237,11 +237,11 @@ public class ReservationApplyServiceImpl extends EgovAbstractServiceImpl impleme
 			                	}
 			                	
 			                	switch(c) {
-			                		case 0 : 
-			                			vo.setChargerNm(value);//신청자명
+			                		case 0 :
+			                			vo.setUserId(value);//신청자ID
 			                			break;
 			                		case 1 : 
-			                			vo.setUserId(value);//신청자ID
+			                			vo.setChargerNm(value);//신청자명
 			                			break;
 			                		case 2 : 
 			                			vo.setTelno(value);//연락처
