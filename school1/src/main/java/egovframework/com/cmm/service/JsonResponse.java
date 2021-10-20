@@ -11,8 +11,6 @@ import java.io.Serializable;
  */
 public class JsonResponse implements Serializable{
 
-	private static final long serialVersionUID = 8190170128458805431L;
-
 	/**
 	 * 성공 여부
 	 */
