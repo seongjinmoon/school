@@ -118,8 +118,8 @@ public class ReservationAdminApplyController {
 	}
 	
 	//엑셀업로드 
-    @RequestMapping(value="/cop/com/excelUpload.json",method=RequestMethod.POST)
-    public @ResponseBody JsonResponse confirmExcelUpload(@ModelAttribute ReservationApplyVO searchVO, ModelMap model,MultipartHttpServletRequest multiRequest,HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @RequestMapping(value="/admin/rsv/excelUpload.json",method=RequestMethod.POST)
+    public @ResponseBody JsonResponse excelUpload(@ModelAttribute ReservationApplyVO searchVO, ModelMap model,MultipartHttpServletRequest multiRequest,HttpServletRequest request, HttpServletResponse response) throws Exception {
     	LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
     	JsonResponse res = new JsonResponse();
     	res.setSuccess(true);

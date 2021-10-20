@@ -121,7 +121,7 @@
 						</div>
 						
 						<div class="excelUploadBox">
-							<form id="excelForm" name="excelForm" action="/cop/com/excelUpload.json" enctype="multipart/form-data" method="post"> 
+							<form id="excelForm" name="excelForm" action="/admin/rsv/excelUpload.json" enctype="multipart/form-data" method="post"> 
 						        <input type="hidden" name="resveId" id="resveId" value="${param.resveId}"/>
 						        <input type="hidden" name="resveDe" value="TYPE01"/>
 						        
