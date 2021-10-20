@@ -77,7 +77,7 @@ public class ReservationApplyController {
 	
 	//예약정보 등록/수정
 	@RequestMapping(value = "/rsv/rsvApplyRegist.do")
-	public String rsvApplyRegist(@ModelAttribute("searchVO") ReservationApplyVO ReservationVO, HttpServletRequest request, ModelMap model) throws Exception{
+	public String rsvApplyRegist(@ModelAttribute("searchVO") ReservationApplyVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 	    if(user == null){
 	    	model.addAttribute("message", "로그인 후 사용가능합니다.");
@@ -88,15 +88,15 @@ public class ReservationApplyController {
 	    
 	    //프로그램 정보
 	    ReservationVO reservation = new ReservationVO();
-		if(!EgovStringUtil.isEmpty(ReservationVO.getResveId())) {
-			reservation = reservationService.selectReservation(ReservationVO);
+		if(!EgovStringUtil.isEmpty(searchVO.getResveId())) {
+			reservation = reservationService.selectReservation(searchVO);
 		}
 		model.addAttribute("reservation", reservation);
 		
 		//예약정보
 	    ReservationApplyVO result = new ReservationApplyVO();
-		if(!EgovStringUtil.isEmpty(ReservationVO.getReqstId())) {
-			result = reservationServiceApply.selectReservationApply(ReservationVO);
+		if(!EgovStringUtil.isEmpty(searchVO.getReqstId())) {
+			result = reservationServiceApply.selectReservationApply(searchVO);
 		}
 		
 		model.addAttribute("result", result);
